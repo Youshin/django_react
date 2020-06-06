@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import './App.css'
+class App extends Component {
+    state = {
+      vibdatas: []
+    };
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    async componentDidMount() {
+        try {
+            const res = await fetch('http://127.0.0.1:8000/api/');
+            const vibdatas = await res.json();
+            this.setState({
+              vibdatas
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                {this.state.vibdatas.map(item => (
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>{item.created_at}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{item.data}</td>
+                        </tr>
+                      </tbody>
+                    </table> 
+                ))}
+            </div>
+        );
+    }
 }
 
 export default App;
