@@ -1,4 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+installed packages by
+
+`npm install`
+
+or
+
+`yarn`
+
+and start with `yarn start`
 
 ## Available Scripts
 
